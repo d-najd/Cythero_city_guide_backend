@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Start All" type="CompoundRunConfigurationType">
+    <toRun name="Start necessary" type="CompoundRunConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DiscoveryServer" type="JetRunConfigurationType" singleton="false">
+    <option name="MAIN_CLASS_NAME" value="com.cythero.cityguide.discoveryserver.DiscoveryServerApplicationKt" />
+    <module name="discovery-server" />
+    <shortenClasspath name="NONE" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
