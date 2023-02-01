@@ -3,5 +3,4 @@ server:
 
 spring:
   application.name: api-gateway
-  #put own git uri
-  cloud.config.server.git.uri: # https://github.com/kbastani/spring-boot-microservice-config
+  cloud.config.server.git.uri: https://github.com/d-najd/Cythero-city-guide-config

@@ -1,9 +1,10 @@
 server.port: 8080
 
 spring:
+  config.import: configserver:http://localhost:8888
   application.name: api-gateway
   cloud:
-    config.enabled: false
+    config.enabled: true
     gateway:
       discovery.locator:
         enabled: true
