@@ -39,7 +39,7 @@ Table reviews {
   id bigint [pk]
   attraction_id bigint [not null, ref: > tourist_attractions.id]
   user_id varchar [not null, ref: > users.id]
-  stars int1(1) [not null] // 0-9 for 1-10 raiting
+  stars int1 [not null] // 0-9 for 1-10 raiting
   title varchar [not null]
   description text // text since description may be bigger than 255 characters
   indexes {
