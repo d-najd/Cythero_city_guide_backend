@@ -8,11 +8,18 @@
 		<version>3.0.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<modules>
+		<module>discovery-server</module>
+		<module>config-server</module>
+		<module>api-gateway</module>
+		<module>users-service</module>
+	</modules>
 	<groupId>com.cythero.cityguide</groupId>
 	<artifactId>cityguide</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cityguide</name>
-	<description>Demo project for Spring Boot</description>
+	<description>.</description>
+	<packaging>pom</packaging>
 	<properties>
 		<java.version>17</java.version>
 		<kotlin.version>1.7.22</kotlin.version>
@@ -67,5 +74,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

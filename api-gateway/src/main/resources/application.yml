@@ -1,0 +1,27 @@
+server.port: 8080
+
+spring:
+  application.name: api-gateway
+  cloud:
+    config.enabled: false
+    gateway:
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true
+      # from previous project, couldn't fix it but is the preferred approach so
+      #routes:
+      #- id: project-service
+      #  uri: lb//project-service
+      #  predicates:
+      #    - Path=/api/project/**
+      #  filters:
+      #    - StripPrefix = 2
+
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint:
+    health:
+      show-details: always
+    #loadBalancer:
+    #  ribbon:
+    #    enabled: true
