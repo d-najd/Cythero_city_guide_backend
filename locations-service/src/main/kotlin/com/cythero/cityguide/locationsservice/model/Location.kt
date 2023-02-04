@@ -17,24 +17,24 @@ data class Location (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    val id: Long = -1L,
+    val id: Long,
 
     @Digits(integer = 20, fraction = 12)
     @Column(nullable = false)
     @NotNull
-    val longitude: BigDecimal = BigDecimal.valueOf(-1),
+    val longitude: BigDecimal,
 
     @Digits(integer = 20, fraction = 12)
     @Column(nullable = false)
     @NotNull
-    val latitude: BigDecimal = BigDecimal.valueOf(-1),
+    val latitude: BigDecimal,
 
     @Column(unique = true, nullable = false)
     @NotNull
-    val address: String = "",
+    val address: String,
 
     @Column(name = "flag_path")
-    val flagPath: String = "",
+    val flagPath: String,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

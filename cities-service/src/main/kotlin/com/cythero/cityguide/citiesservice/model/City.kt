@@ -13,10 +13,10 @@ data class City(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    val id: Long = -1L,
+    val id: Long,
 
     @Column(name = "country_id", nullable = false)
-    val country_id: Long = -1L,
+    val country_id: Long,
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -27,10 +27,10 @@ data class City(
         updatable = false,
         insertable = false,
     )
-    var country: Country? = null,
+    var country: Country?,
 
     @Column(name = "location_id", unique = true, nullable = false)
-    val location_id: Long = -1L,
+    val location_id: Long,
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -41,11 +41,11 @@ data class City(
         updatable = false,
     )
     @OnDelete(action = OnDeleteAction.CASCADE)
-    val location: Location? = null,
+    val location: Location?,
 
     @Column(nullable = false)
     @NotBlank
-    val name: String = "",
+    val name: String,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

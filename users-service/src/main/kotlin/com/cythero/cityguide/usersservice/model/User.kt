@@ -23,7 +23,7 @@ data class User (
     @Column(name = "username", unique = true, nullable = false)
     @NotNull
     @NotEmpty
-    val username: String = "",
+    val username: String,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

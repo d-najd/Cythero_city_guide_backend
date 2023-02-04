@@ -11,15 +11,5 @@ data class Country (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    val id: Long = -1L,
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Country
-
-        return id == other.id
-    }
-
-    override fun hashCode(): Int = javaClass.hashCode()
-}
+    val id: Long,
+)

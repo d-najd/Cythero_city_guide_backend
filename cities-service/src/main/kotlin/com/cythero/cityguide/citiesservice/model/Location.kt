@@ -12,5 +12,5 @@ data class Location (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    val id: Long = -1L,
+    val id: Long,
 )

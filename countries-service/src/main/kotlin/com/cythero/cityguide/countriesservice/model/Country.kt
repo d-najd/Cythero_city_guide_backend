@@ -15,13 +15,13 @@ data class Country (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    val id: Long = -1L,
+    val id: Long,
 
-    @Column(nullable = false)
-    val location_id: Long = -1L,
+    @Column(name = "location_id", nullable = false)
+    val location_id: Long,
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(
         name = "location_id",
         referencedColumnName = "id",
@@ -29,11 +29,11 @@ data class Country (
         updatable = false,
     )
     @OnDelete(action = OnDeleteAction.CASCADE)
-    val location: Location? = null,
+    val location: Location?,
 
     @Column(unique = true, nullable = false)
     @NotBlank
-    val name: String = "",
+    val name: String,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
