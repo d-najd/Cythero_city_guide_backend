@@ -6,8 +6,8 @@ Table users {
 Table locations {
   id bigint [pk]
   longitude varchar [not null] // compatable with java.math.BigDecimal
-  latitude varchar [not null] // compatable with java.math.BigDecimal
-  address varchar [not null, unique]
+  latitude decimal(20,12) [not null] // compatable with java.math.BigDecimal
+  address decimal(20,12) [not null, unique]
   flag_path varchar // [unique]
   indexes {
     (longitude, latitude) [unique]

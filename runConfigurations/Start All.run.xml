@@ -1,6 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Start All" type="CompoundRunConfigurationType">
     <toRun name="Start Necessary" type="CompoundRunConfigurationType" />
+    <toRun name="CountriesService" type="JetRunConfigurationType" />
+    <toRun name="LocationsService" type="JetRunConfigurationType" />
+    <toRun name="UsersService" type="JetRunConfigurationType" />
     <method v="2" />
   </configuration>
 </component>

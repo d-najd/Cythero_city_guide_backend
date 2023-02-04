@@ -9,7 +9,6 @@ import java.lang.IllegalArgumentException
 import java.util.UUID
 import kotlin.jvm.optionals.getOrNull
 
-@ExperimentalStdlibApi
 @RequestMapping("/api")
 @RestController
 class UserResource(val repository: UserRepository) {
@@ -22,21 +21,21 @@ class UserResource(val repository: UserRepository) {
     fun getById(
         @PathVariable id: String
     ): User {
-        return repository.findById(id).getOrNull() ?: throw IllegalArgumentException("invalid id $id")
+        return repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
     }
 
     @GetMapping("/username/{username}")
     fun getByUsername(
         @PathVariable username: String
     ): User {
-        return repository.findByUsername(username).getOrNull() ?: throw IllegalArgumentException("invalid username $username")
+        return repository.findByUsername(username).orElseThrow { throw IllegalArgumentException("invalid username $username") }
     }
 
     @PostMapping
     fun post(
         @RequestBody pojo: User,
     ): User {
-        if (repository.findByUsername(pojo.username).isPresent) {
+        repository.findByUsername(pojo.username).ifPresent {
             throw IllegalArgumentException("User with username ${pojo.username} already exists")
         }
         return repository.save(pojo.copy(

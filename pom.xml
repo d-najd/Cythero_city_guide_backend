@@ -13,6 +13,8 @@
 		<module>config-server</module>
 		<module>api-gateway</module>
 		<module>users-service</module>
+		<module>locations-service</module>
+		<module>countries-service</module>
 	</modules>
 	<groupId>com.cythero.cityguide</groupId>
 	<artifactId>cityguide</artifactId>
