@@ -40,6 +40,23 @@ class UserResource(val repository: LocationRepository) {
         return repository.save(pojo)
     }
 
+    @PutMapping("/{id}")
+    fun put(
+        @PathVariable id: Long,
+        @RequestParam("address") address: String? = null,
+        @RequestParam("flagPath") flagPath: String? = null,
+        @RequestParam("returnBody") shouldReturnBody: Boolean = true,
+    ): Location? {
+        val persistedLocation = repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
+        val returnBody = repository.saveAndFlush(
+            persistedLocation.copy(
+                address = address ?: persistedLocation.address,
+                flagPath = flagPath ?: persistedLocation.flagPath
+            )
+        )
+        return if(shouldReturnBody) returnBody else null
+    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     fun delete(

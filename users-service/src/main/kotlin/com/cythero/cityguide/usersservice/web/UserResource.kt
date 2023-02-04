@@ -43,6 +43,8 @@ class UserResource(val repository: UserRepository) {
         ))
     }
 
+    // Put request intentionally left out
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     fun delete(
