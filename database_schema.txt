@@ -5,9 +5,9 @@ Table users {
 
 Table locations {
   id bigint [pk]
-  longitude varchar [not null] // compatable with java.math.BigDecimal
+  longitude decimal(20, 12) [not null] // compatable with java.math.BigDecimal
   latitude decimal(20,12) [not null] // compatable with java.math.BigDecimal
-  address decimal(20,12) [not null, unique]
+  address varchar [not null, unique]
   flag_path varchar // [unique]
   indexes {
     (longitude, latitude) [unique]
@@ -16,16 +16,21 @@ Table locations {
 
 Table countries {
   id bigint [pk]
-  location_id bigint [not null, unique, ref: > locations.id]
+  location_id bigint [not null, unique]
   name varchar [not null, unique]
 }
 
+Ref: countries.location_id > locations.id [delete: cascade]
+
 Table cities {
   id bigint [pk]
-  country_id bigint [not null, ref: > countries.id]
-  location_id bigint [not null, unique, ref: > locations.id]
+  country_id bigint [not null]
+  location_id bigint [unique, not null]
   name varchar [not null] // intentionally not unique
 }
+
+Ref: cities.country_id > countries.id [delete: cascade]
+Ref: cities.location_id > locations.id [delete: cascade]
 
 Table tourist_attractions {
   id bigint [pk]

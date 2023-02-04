@@ -1,4 +1,4 @@
-package com.cythero.cityguide.countriesservice.model
+package com.cythero.cityguide.citiesservice.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
@@ -8,20 +8,32 @@ import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
 
 @Entity
-@Table(
-    name = "countries",
-)
-data class Country (
+@Table(name = "cities")
+data class City(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     val id: Long = -1L,
 
-    @Column(nullable = false)
+    @Column(name = "country_id", nullable = false)
+    val country_id: Long = -1L,
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(
+        name = "country_id",
+        referencedColumnName = "id",
+        updatable = false,
+        insertable = false,
+    )
+    var country: Country? = null,
+
+    @Column(name = "location_id", unique = true, nullable = false)
     val location_id: Long = -1L,
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(
         name = "location_id",
         referencedColumnName = "id",
@@ -31,14 +43,14 @@ data class Country (
     @OnDelete(action = OnDeleteAction.CASCADE)
     val location: Location? = null,
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     @NotBlank
     val name: String = "",
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Country
+        other as City
 
         return id == other.id
     }
@@ -47,7 +59,6 @@ data class Country (
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , location_id = $location_id , name = $name )"
+        return this::class.simpleName + "(id = $id , country_id = $country_id , location_id = $location_id , name = $name )"
     }
-
 }

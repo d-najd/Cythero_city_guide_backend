@@ -15,6 +15,7 @@
 		<module>users-service</module>
 		<module>locations-service</module>
 		<module>countries-service</module>
+		<module>cities-service</module>
 	</modules>
 	<groupId>com.cythero.cityguide</groupId>
 	<artifactId>cityguide</artifactId>
