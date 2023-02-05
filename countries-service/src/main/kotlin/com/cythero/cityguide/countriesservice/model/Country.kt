@@ -11,12 +11,12 @@ import org.hibernate.annotations.OnDeleteAction
 @Table(name = "countries")
 data class Country (
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, updatable = false)
     val id: Long,
 
     @Column(name = "location_id", nullable = false, updatable = false)
-    val location_id: Long,
+    val locationId: Long,
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -45,7 +45,7 @@ data class Country (
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , location_id = $location_id , name = $name )"
+        return this::class.simpleName + "(id = $id , location_id = $locationId , name = $name )"
     }
 
 }

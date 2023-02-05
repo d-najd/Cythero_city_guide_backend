@@ -10,12 +10,12 @@ import org.hibernate.annotations.OnDeleteAction
 @Table(name = "tourist_attractions")
 data class TouristAttraction (
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, updatable = false)
     val id: Long,
 
     @Column(name = "city_id", nullable = false)
-    val city_id: Long,
+    val cityId: Long,
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -29,7 +29,7 @@ data class TouristAttraction (
     val city: City?,
 
     @Column(name = "location_id", nullable = false)
-    val location_id: Long,
+    val locationId: Long,
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -46,7 +46,7 @@ data class TouristAttraction (
     val name: String,
 
     @Column(name = "description", length = 65534)
-    val description: String? = null,
+    val description: String?,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -60,6 +60,6 @@ data class TouristAttraction (
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , city_id = $city_id , location_id = $location_id , name = $name , description = $description )"
+        return this::class.simpleName + "(id = $id , city_id = $cityId , location_id = $locationId , name = $name , description = $description )"
     }
 }

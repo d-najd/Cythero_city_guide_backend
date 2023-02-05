@@ -15,3 +15,7 @@ INSERT IGNORE INTO countries VALUES (2, 2, "Macedonia2");
 INSERT IGNORE INTO cities VALUES (1, 1, 1, "Bitola");
 
 INSERT IGNORE INTO cities VALUES (2, 1, 2, "Skopje");
+
+INSERT IGNORE INTO tourist_attractions(1, 2, 1, "Portal", null);
+
+INSERT IGNORE INTO tourist_attractions(2, 2, 1, "Portal2", null);

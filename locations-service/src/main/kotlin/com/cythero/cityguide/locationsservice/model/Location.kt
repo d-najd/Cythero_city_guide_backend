@@ -15,7 +15,7 @@ import java.math.BigDecimal
 )
 data class Location (
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, updatable = false)
     val id: Long,
 

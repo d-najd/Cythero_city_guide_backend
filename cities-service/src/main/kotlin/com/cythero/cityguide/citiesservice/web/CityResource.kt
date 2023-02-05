@@ -35,11 +35,13 @@ class CityResource(val repository: CityRepository) {
     fun put(
         @PathVariable id: Long,
         @RequestParam("name") name: String? = null,
+        @RequestParam("countryId") countryId: Long? = null,
         @RequestParam("returnBody") shouldReturnBody: Boolean = true,
     ): City? {
         val persistedCity = repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
         val returnBody = repository.saveAndFlush(
             persistedCity.copy(
+                countryId = countryId ?: persistedCity.locationId,
                 name = name ?: persistedCity.name,
             )
         )
