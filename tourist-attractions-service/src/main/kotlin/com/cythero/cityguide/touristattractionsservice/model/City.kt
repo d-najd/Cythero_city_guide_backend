@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction
 @Table(name = "cities")
 data class City(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false, insertable = false)
     val id: Long,
 )

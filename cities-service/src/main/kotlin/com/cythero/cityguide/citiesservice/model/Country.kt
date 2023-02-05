@@ -4,12 +4,10 @@ import jakarta.persistence.*
 import org.hibernate.Hibernate
 
 @Entity
-@Table(
-    name = "countries",
-)
+@Table(name = "countries")
 data class Country (
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, insertable = false, updatable = false)
     val id: Long,
 )

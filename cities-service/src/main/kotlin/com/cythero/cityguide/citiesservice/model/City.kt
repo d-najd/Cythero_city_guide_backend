@@ -11,8 +11,8 @@ import org.hibernate.annotations.OnDeleteAction
 @Table(name = "cities")
 data class City(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     val id: Long,
 
     @Column(name = "country_id", nullable = false)
@@ -29,7 +29,7 @@ data class City(
     )
     val country: Country?,
 
-    @Column(name = "location_id", unique = true, nullable = false)
+    @Column(name = "location_id", unique = true, nullable = false, updatable = false)
     val location_id: Long,
 
     @JsonIgnore

@@ -7,17 +7,11 @@ import org.hibernate.Hibernate
 import java.util.*
 
 @Entity
-@Table(
-    name = "users",
-    /* why did I write this
-    uniqueConstraints = [
-        UniqueConstraint(name = "users_unique_0", columnNames = ["id", "username"])
-    ]
-     */
-)
+@Table(name = "users")
 data class User (
     @Id
-    @Column(nullable = false)
+    // @GeneratedValue(strategy = GenerationType.UUID) doesn't work
+    @Column(nullable = false, updatable = false)
     val id: String = UUID.randomUUID().toString(),
 
     @Column(name = "username", unique = true, nullable = false)

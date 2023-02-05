@@ -10,7 +10,7 @@ import java.math.BigDecimal
 @Table(name = "locations")
 data class Location (
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, insertable = false, updatable = false)
     val id: Long,
 )

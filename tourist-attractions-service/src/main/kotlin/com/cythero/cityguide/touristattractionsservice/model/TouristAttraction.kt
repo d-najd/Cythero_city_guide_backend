@@ -2,19 +2,16 @@ package com.cythero.cityguide.touristattractionsservice.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
-import jakarta.validation.constraints.Digits
-import jakarta.validation.constraints.NotNull
 import org.hibernate.Hibernate
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
-import java.math.BigDecimal
 
 @Entity
 @Table(name = "tourist_attractions")
 data class TouristAttraction (
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     val id: Long,
 
     @Column(name = "city_id", nullable = false)

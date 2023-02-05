@@ -15,8 +15,8 @@ import java.math.BigDecimal
 )
 data class Location (
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     val id: Long,
 
     @Digits(integer = 20, fraction = 12)
