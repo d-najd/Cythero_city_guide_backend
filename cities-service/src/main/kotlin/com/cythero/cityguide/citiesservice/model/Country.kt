@@ -7,7 +7,6 @@ import org.hibernate.Hibernate
 @Table(name = "countries")
 data class Country (
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, insertable = false, updatable = false)
     val id: Long,
 )

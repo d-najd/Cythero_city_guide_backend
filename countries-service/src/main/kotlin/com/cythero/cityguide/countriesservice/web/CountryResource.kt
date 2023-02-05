@@ -34,8 +34,8 @@ class CountryResource(val repository: CountryRepository) {
     @PutMapping("/{id}")
     fun put(
         @PathVariable id: Long,
-        @RequestParam("name") name: String? = null,
         @RequestParam("returnBody") shouldReturnBody: Boolean = true,
+        @RequestParam("name") name: String? = null,
     ): Country? {
         val persistedCountry = repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
         val returnBody = repository.saveAndFlush(

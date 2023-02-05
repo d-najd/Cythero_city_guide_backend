@@ -17,6 +17,7 @@
 		<module>countries-service</module>
 		<module>cities-service</module>
 		<module>tourist-attractions-service</module>
+		<module>reviews-service</module>
 	</modules>
 	<groupId>com.cythero.cityguide</groupId>
 	<artifactId>cityguide</artifactId>

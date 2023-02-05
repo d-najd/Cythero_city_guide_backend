@@ -43,11 +43,11 @@ class UserResource(val repository: LocationRepository) {
     @PutMapping("/{id}")
     fun put(
         @PathVariable id: Long,
+        @RequestParam("returnBody") shouldReturnBody: Boolean = true,
         @RequestParam("address") address: String? = null,
         @RequestParam("longitude") longitude: BigDecimal? = null,
         @RequestParam("latitude") latitude: BigDecimal? = null,
         @RequestParam("flagPath") flagPath: String? = null,
-        @RequestParam("returnBody") shouldReturnBody: Boolean = true,
     ): Location? {
         val persistedLocation = repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
         val returnBody = repository.saveAndFlush(

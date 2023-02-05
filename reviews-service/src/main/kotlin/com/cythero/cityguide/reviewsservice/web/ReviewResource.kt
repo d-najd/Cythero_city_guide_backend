@@ -1,30 +1,30 @@
-package com.cythero.cityguide.citiesservice.web
+package com.cythero.cityguide.reviewsservice.web
 
-import com.cythero.cityguide.citiesservice.model.City
-import com.cythero.cityguide.citiesservice.model.CityHolder
-import com.cythero.cityguide.citiesservice.model.CityRepository
+import com.cythero.cityguide.reviewsservice.model.Review
+import com.cythero.cityguide.reviewsservice.model.ReviewHolder
+import com.cythero.cityguide.reviewsservice.model.ReviewRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/api")
 @RestController
-class CityResource(val repository: CityRepository) {
+class UserResource(val repository: ReviewRepository) {
     @GetMapping("/testing/getAll")
-    fun getAll(): CityHolder {
-        return CityHolder(repository.findAll())
+    fun getAll(): ReviewHolder {
+        return ReviewHolder(repository.findAll())
     }
 
     @GetMapping("/{id}")
     fun getById(
         @PathVariable id: Long
-    ): City {
+    ): Review {
         return repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
     }
 
     @PostMapping
     fun post(
-        @RequestBody pojo: City,
-    ): City {
+        @RequestBody pojo: Review,
+    ): Review {
         repository.findById(pojo.id).ifPresent {
             throw IllegalArgumentException("field with id ${pojo.id} already exists")
         }
@@ -35,14 +35,16 @@ class CityResource(val repository: CityRepository) {
     fun put(
         @PathVariable id: Long,
         @RequestParam("returnBody") shouldReturnBody: Boolean = true,
-        @RequestParam("name") name: String? = null,
-        @RequestParam("countryId") countryId: Long? = null,
-    ): City? {
-        val persistedCity = repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
+        @RequestParam("stars") stars: Int? = null,
+        @RequestParam("title") title: String? = null,
+        @RequestParam("description") description: String? = null,
+    ): Review? {
+        val persistedReview = repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
         val returnBody = repository.saveAndFlush(
-            persistedCity.copy(
-                countryId = countryId ?: persistedCity.locationId,
-                name = name ?: persistedCity.name,
+            persistedReview.copy(
+                stars = stars ?: persistedReview.stars,
+                title = title ?: persistedReview.title,
+                description = description ?: persistedReview.description,
             )
         )
         return if(shouldReturnBody) returnBody else null

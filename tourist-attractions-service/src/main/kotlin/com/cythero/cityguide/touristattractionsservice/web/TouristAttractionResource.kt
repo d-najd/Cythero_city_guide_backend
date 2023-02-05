@@ -34,11 +34,11 @@ class TouristAttractionResource(val repository: TouristAttractionRepository) {
     @PutMapping("/{id}")
     fun put(
         @PathVariable id: Long,
+        @RequestParam("returnBody") shouldReturnBody: Boolean = true,
         @RequestParam("locationId") locationId: Long? = null,
         @RequestParam("cityId") cityId: Long? = null,
         @RequestParam("name") name: String? = null,
         @RequestParam("description") description: String? = null,
-        @RequestParam("returnBody") shouldReturnBody: Boolean = true,
     ): TouristAttraction? {
         val persistedTouristAttraction = repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
         val returnBody = repository.saveAndFlush(
