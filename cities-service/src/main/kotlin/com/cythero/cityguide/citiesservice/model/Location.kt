@@ -11,6 +11,6 @@ import java.math.BigDecimal
 data class Location (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(nullable = false)
     val id: Long,
 )

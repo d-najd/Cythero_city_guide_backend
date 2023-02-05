@@ -1,56 +1,60 @@
-package com.cythero.cityguide.citiesservice.model
+package com.cythero.cityguide.touristattractionsservice.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
-import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Digits
+import jakarta.validation.constraints.NotNull
 import org.hibernate.Hibernate
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
+import java.math.BigDecimal
 
 @Entity
-@Table(name = "cities")
-data class City(
+@Table(name = "tourist_attractions")
+data class TouristAttraction (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     val id: Long,
 
-    @Column(name = "country_id", nullable = false)
-    val country_id: Long,
+    @Column(name = "city_id", nullable = false)
+    val city_id: Long,
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(
-        name = "country_id",
+        name = "city_id",
         referencedColumnName = "id",
         updatable = false,
         insertable = false,
     )
-    val country: Country?,
+    val city: City?,
 
-    @Column(name = "location_id", unique = true, nullable = false)
+    @Column(name = "location_id", nullable = false)
     val location_id: Long,
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(
         name = "location_id",
         referencedColumnName = "id",
-        insertable = false,
         updatable = false,
+        insertable = false,
     )
-    @OnDelete(action = OnDeleteAction.CASCADE)
     val location: Location?,
 
-    @Column(nullable = false)
-    @NotBlank
+    @Column(name = "name", nullable = false)
     val name: String,
+
+    @Column(name = "description", length = 65534)
+    val description: String? = null,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as City
+        other as TouristAttraction
 
         return id == other.id
     }
@@ -59,6 +63,6 @@ data class City(
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , country_id = $country_id , location_id = $location_id , name = $name )"
+        return this::class.simpleName + "(id = $id , city_id = $city_id , location_id = $location_id , name = $name , description = $description )"
     }
 }

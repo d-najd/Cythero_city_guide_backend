@@ -17,7 +17,7 @@ import java.util.*
 )
 data class User (
     @Id
-    @Column
+    @Column(nullable = false)
     val id: String = UUID.randomUUID().toString(),
 
     @Column(name = "username", unique = true, nullable = false)
