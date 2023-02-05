@@ -5,9 +5,7 @@ import com.cythero.cityguide.usersservice.model.UserHolder
 import com.cythero.cityguide.usersservice.model.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import java.lang.IllegalArgumentException
 import java.util.UUID
-import kotlin.jvm.optionals.getOrNull
 
 @RequestMapping("/api")
 @RestController
@@ -28,7 +26,9 @@ class UserResource(val repository: UserRepository) {
     fun getByUsername(
         @PathVariable username: String
     ): User {
-        return repository.findByUsername(username).orElseThrow { throw IllegalArgumentException("invalid username $username") }
+        return repository.findByUsername(username).orElseThrow { throw
+        IllegalArgumentException("invalid username $username")
+        }
     }
 
     @PostMapping

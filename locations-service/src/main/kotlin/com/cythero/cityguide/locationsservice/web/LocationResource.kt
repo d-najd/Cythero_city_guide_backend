@@ -27,7 +27,9 @@ class UserResource(val repository: LocationRepository) {
         @PathVariable longitude: BigDecimal,
         @PathVariable latitude: BigDecimal,
     ): Location {
-        return repository.findByLongitudeAndLatitude(longitude, latitude).orElseThrow { throw java.lang.IllegalArgumentException("Invalid longitude $longitude and $latitude") }
+        return repository.findByLongitudeAndLatitude(longitude, latitude).orElseThrow {
+            throw IllegalArgumentException("Invalid longitude $longitude and $latitude")
+        }
     }
 
     @PostMapping

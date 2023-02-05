@@ -40,7 +40,9 @@ class TouristAttractionResource(val repository: TouristAttractionRepository) {
         @RequestParam("name") name: String? = null,
         @RequestParam("description") description: String? = null,
     ): TouristAttraction? {
-        val persistedTouristAttraction = repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") }
+        val persistedTouristAttraction = repository.findById(id).orElseThrow {
+            throw IllegalArgumentException("Invalid id $id")
+        }
         val returnBody = repository.saveAndFlush(
             persistedTouristAttraction.copy(
                 locationId = locationId ?: persistedTouristAttraction.locationId,
