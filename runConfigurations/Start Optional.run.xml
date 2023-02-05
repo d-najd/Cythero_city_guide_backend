@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Start Optional" type="CompoundRunConfigurationType">
+    <toRun name="CitiesService" type="JetRunConfigurationType" />
+    <toRun name="CountriesService" type="JetRunConfigurationType" />
+    <toRun name="LocationsService" type="JetRunConfigurationType" />
+    <toRun name="UsersService" type="JetRunConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>
