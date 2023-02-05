@@ -1,4 +1,4 @@
-package com.cythero.cityguide.reviewsservice.model
+package com.cythero.cityguide.reviewsservice.model.relations
 
 import jakarta.persistence.*
 

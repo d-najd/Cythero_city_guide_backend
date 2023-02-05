@@ -1,5 +1,7 @@
 package com.cythero.cityguide.touristattractionsservice.model
 
+import com.cythero.cityguide.touristattractionsservice.model.relations.City
+import com.cythero.cityguide.touristattractionsservice.model.relations.Location
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.hibernate.Hibernate

@@ -1,4 +1,4 @@
-package com.cythero.cityguide.citiesservice.model
+package com.cythero.cityguide.citiesservice.model.relations
 
 import jakarta.persistence.*
 import org.hibernate.Hibernate

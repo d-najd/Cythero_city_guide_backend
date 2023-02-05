@@ -1,4 +1,4 @@
-package com.cythero.cityguide.countriesservice.model
+package com.cythero.cityguide.countriesservice.model.relations
 
 import jakarta.persistence.*
 import jakarta.validation.constraints.Digits

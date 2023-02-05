@@ -1,5 +1,7 @@
 package com.cythero.cityguide.citiesservice.model
 
+import com.cythero.cityguide.citiesservice.model.relations.Country
+import com.cythero.cityguide.citiesservice.model.relations.Location
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotBlank

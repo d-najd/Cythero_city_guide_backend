@@ -1,13 +1,12 @@
 package com.cythero.cityguide.reviewsservice.model
 
+import com.cythero.cityguide.reviewsservice.model.relations.TouristAttraction
+import com.cythero.cityguide.reviewsservice.model.relations.User
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
-import jakarta.validation.constraints.Digits
-import jakarta.validation.constraints.NotNull
 import org.hibernate.Hibernate
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
-import java.math.BigDecimal
 
 @Entity
 @Table(name = "reviews")
