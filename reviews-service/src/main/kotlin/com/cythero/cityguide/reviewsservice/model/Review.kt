@@ -10,7 +10,12 @@ import org.hibernate.annotations.OnDeleteAction
 import java.lang.IllegalArgumentException
 
 @Entity
-@Table(name = "reviews")
+@Table(
+    name = "reviews",
+    uniqueConstraints = [
+        UniqueConstraint(name = "reviews_unique_0", columnNames = ["attraction_id", "user_id"])
+    ],
+)
 data class Review (
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
