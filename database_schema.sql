@@ -5,8 +5,8 @@ Table users {
 
 Table locations {
   id bigint [pk]
-  longitude decimal(20, 12) [not null] // compatable with java.math.BigDecimal
-  latitude decimal(20,12) [not null] // compatable with java.math.BigDecimal
+  longitude decimal(20, 12) [not null] // compatible with java.math.BigDecimal
+  latitude decimal(20,12) [not null] // compatible with java.math.BigDecimal
   address varchar [not null, unique]
   flag_path varchar // [unique]
   indexes {
@@ -63,7 +63,7 @@ Table images {
   city_id bigint
   attraction_id bigint
   review_id bigint
-  path varchar [not null, unique]
+  path varchar [not null]
 }
 
 Ref: images.city_id > cities.id [delete: cascade]

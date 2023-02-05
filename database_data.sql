@@ -20,6 +20,12 @@ INSERT IGNORE INTO tourist_attractions VALUES (1, 2, 1, "Portal", null);
 
 INSERT IGNORE INTO tourist_attractions VALUES (2, 2, 1, "Portal2", null);
 
-INSERT IGNORE INTO reviews VALUES (1, 1, "1", 9, "Good", null)
+INSERT IGNORE INTO reviews VALUES (1, 1, "1", 9, "Good", null);
 
-INSERT IGNORE INTO reviews VALUES (2, 1, "2", 0, "Bad", "Description")
+INSERT IGNORE INTO reviews VALUES (2, 1, "2", 0, "Bad", "Description");
+
+INSERT IGNORE INTO images VALUES (1, 1, null, null, "http://somepath.com/img.jpg");
+
+INSERT IGNORE INTO images VALUES (2, null, 1, null, "http://somepath.com/img.jpg");
+
+INSERT IGNORE INTO images VALUES (3, null, null, 1, "http://somepath.com/img.jpg");

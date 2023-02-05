@@ -2,6 +2,7 @@
   <configuration default="false" name="Start Optional" type="CompoundRunConfigurationType">
     <toRun name="CitiesService" type="JetRunConfigurationType" />
     <toRun name="CountriesService" type="JetRunConfigurationType" />
+    <toRun name="ImagesService" type="JetRunConfigurationType" />
     <toRun name="LocationsService" type="JetRunConfigurationType" />
     <toRun name="ReviewsService" type="JetRunConfigurationType" />
     <toRun name="TouristAttractionsService" type="JetRunConfigurationType" />
