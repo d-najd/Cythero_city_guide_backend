@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/api")
 @RestController
-class UserResource(val repository: ReviewRepository) {
+class ReviewsResource(val repository: ReviewRepository) {
     @GetMapping("/testing/getAll")
     fun getAll(): ReviewHolder {
         return ReviewHolder(repository.findAll())

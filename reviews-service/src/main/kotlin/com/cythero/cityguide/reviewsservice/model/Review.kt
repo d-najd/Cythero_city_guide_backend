@@ -7,6 +7,7 @@ import jakarta.persistence.*
 import org.hibernate.Hibernate
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
+import java.lang.IllegalArgumentException
 
 @Entity
 @Table(name = "reviews")
@@ -53,6 +54,13 @@ data class Review (
     @Column(name = "description", length = 65534)
     val description: String?,
 ) {
+    private fun starsValidate(stars: Int): Boolean = stars in 0..9
+
+    @PrePersist
+    fun validate() {
+        if(!starsValidate(stars)) throw IllegalArgumentException("Stars must be in range 0..9")
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
