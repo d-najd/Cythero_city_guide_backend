@@ -2,5 +2,5 @@ server:
   port: 8888
 
 spring:
-  application.name: api-gateway
+  application.name: config-server
   cloud.config.server.git.uri: https://github.com/d-najd/Cythero-city-guide-config
