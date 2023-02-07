@@ -1,64 +1,35 @@
 package com.cythero.cityguide.usersservice.config
 
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import org.springframework.security.web.SecurityFilterChain
-
-
-
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
+import org.springframework.security.config.web.server.ServerHttpSecurity
+import org.springframework.security.core.userdetails.MapReactiveUserDetailsService
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.web.server.SecurityWebFilterChain
 
 
 @Configuration
-@EnableWebSecurity
-class SecurityConfiguration : WebSecurityConfigurerAdapter() {
-    @Throws(Exception::class)
-    override fun configure(http: HttpSecurity) {
-        http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().httpBasic()
-    }
-}
-
-/*
 @EnableWebFluxSecurity
-class SecurityConfig{
-
+class MyExplicitSecurityConfiguration {
     @Bean
-    fun springSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain? {
-        return http
-            .csrf().disable()
+    fun springSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
+        http
             .authorizeExchange()
-                .pathMatchers(HttpMethod.GET, "/**").permitAll() //.hasRole("USER")
-            .anyExchange()
-            .permitAll() //.authenticated()
+            .anyExchange().authenticated()
             .and()
-                .formLogin()
-            .and()
-                .httpBasic()
-            .and()
-                .build()
+            .httpBasic().and()
+            .formLogin()
+        return http.build()
     }
 
     @Bean
-    fun userDetailsService(): MapReactiveUserDetailsService? {
+    fun userDetailsService(): MapReactiveUserDetailsService {
         val user = User.withDefaultPasswordEncoder()
-            .username("user1")
+            .username("user")
             .password("password")
             .roles("USER")
-            .authorities("USER")
             .build()
-
-        val user2 = User.withUsername("user2")
-            .password(NoOpPasswordEncoder.getInstance().encode("password"))
-            .roles("USER")
-            .build()
-
-        val re = user.password
-        val se = user2.password
-        val s = re + se
-        return MapReactiveUserDetailsService(user, user)
+        return MapReactiveUserDetailsService(user)
     }
-
 }
-
- */

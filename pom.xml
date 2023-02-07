@@ -19,8 +19,6 @@
 		<module>tourist-attractions-service</module>
 		<module>reviews-service</module>
 		<module>images-service</module>
-		<module>test-auth-service4</module>
-		<module>test-auth-service5</module>
 	</modules>
 	<groupId>com.cythero.cityguide</groupId>
 	<artifactId>cityguide</artifactId>
