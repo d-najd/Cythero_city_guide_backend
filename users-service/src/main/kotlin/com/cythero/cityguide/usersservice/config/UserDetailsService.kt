@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
 @Service
-class UserService(val repository: UserRepository): ReactiveUserDetailsService {
+class UserDetailsService(val repository: UserRepository): ReactiveUserDetailsService {
 
     /*
     override fun loadUserByUsername(username: String?): UserDetails {
