@@ -1,6 +1,7 @@
 package com.cythero.cityguide.citiesservice.model
 
 import com.cythero.cityguide.citiesservice.model.relations.Country
+import com.cythero.cityguide.citiesservice.model.relations.Image
 import com.cythero.cityguide.citiesservice.model.relations.Location
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
@@ -48,6 +49,12 @@ data class City(
     @Column(nullable = false)
     @NotBlank
     val name: String,
+
+    @OneToMany(
+        mappedBy = "city",
+        fetch = FetchType.EAGER,
+    )
+    val images: List<Image> = emptyList()
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
