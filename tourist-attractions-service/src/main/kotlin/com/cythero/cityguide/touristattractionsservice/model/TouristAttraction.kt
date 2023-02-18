@@ -33,8 +33,7 @@ data class TouristAttraction (
     @Column(name = "location_id", nullable = false)
     val locationId: Long,
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(
         name = "location_id",

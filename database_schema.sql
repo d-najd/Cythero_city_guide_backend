@@ -8,7 +8,7 @@ Table locations {
   longitude decimal(20, 12) [not null] // compatible with java.math.BigDecimal
   latitude decimal(20,12) [not null] // compatible with java.math.BigDecimal
   address varchar [not null, unique]
-  flag_path varchar // [unique]
+  flag_path varchar // [not null, unique]
   indexes {
     (longitude, latitude) [unique]
   }

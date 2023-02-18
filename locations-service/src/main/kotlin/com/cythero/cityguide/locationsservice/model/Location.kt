@@ -33,7 +33,7 @@ data class Location (
     @NotNull
     val address: String,
 
-    @Column(name = "flag_path")
+    @Column(name = "flag_path", nullable = false)
     val flagPath: String,
 ) {
     override fun equals(other: Any?): Boolean {
