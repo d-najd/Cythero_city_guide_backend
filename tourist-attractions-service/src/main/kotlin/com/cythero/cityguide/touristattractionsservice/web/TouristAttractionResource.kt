@@ -3,8 +3,11 @@ package com.cythero.cityguide.touristattractionsservice.web
 import com.cythero.cityguide.touristattractionsservice.model.TouristAttraction
 import com.cythero.cityguide.touristattractionsservice.model.TouristAttractionHolder
 import com.cythero.cityguide.touristattractionsservice.model.TouristAttractionRepository
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+
 
 @RequestMapping("/api")
 @RestController
@@ -12,6 +15,17 @@ class TouristAttractionResource(val repository: TouristAttractionRepository) {
     @GetMapping("/testing/getAll")
     fun getAll(): TouristAttractionHolder {
         return TouristAttractionHolder(repository.findAll())
+    }
+
+    @GetMapping("/page/{page}")
+    fun getNextAttractionsPage(
+        @PathVariable page: Int,
+        @RequestParam("pageSize") pageSize: Int? = null,
+    ): TouristAttractionHolder {
+        if(pageSize != null && pageSize > 25) {
+            throw IllegalArgumentException("pageSize must not exceed 25, current is $pageSize")
+        }
+        return TouristAttractionHolder(repository.findAll(PageRequest.of(page, pageSize ?: 5, Sort.by("id"))).content)
     }
 
     @GetMapping("/{id}")

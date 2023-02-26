@@ -12,7 +12,7 @@ import org.hibernate.annotations.OnDeleteAction
 @Table(name = "tourist_attractions")
 data class TouristAttraction (
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
     val id: Long,
 

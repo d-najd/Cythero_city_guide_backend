@@ -15,6 +15,9 @@ data class Location (
 
     @Column(name = "flag_path", nullable = false, insertable = false, updatable = false)
     val flagPath: String,
+
+    @Column(unique = true, nullable = false, insertable = false, updatable = false)
+    val address: String,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
