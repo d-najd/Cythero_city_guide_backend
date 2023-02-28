@@ -8,7 +8,7 @@ Table locations {
   longitude decimal(20, 12) [not null] // compatible with java.math.BigDecimal
   latitude decimal(20,12) [not null] // compatible with java.math.BigDecimal
   address varchar [not null, unique]
-  flag_path varchar // [not null, unique]
+  flag_path varchar // [unique]
   indexes {
     (longitude, latitude) [unique]
   }
@@ -69,3 +69,20 @@ Table images {
 Ref: images.city_id > cities.id [delete: cascade]
 Ref: images.attraction_id > tourist_attractions.id [delete: cascade]
 Ref: images.review_id > reviews.id [delete: cascade]
+
+// long/integer is not used because the type will still need to be returned defeating the whole purpose and the braces and the id being returned will probably make it worse as well
+Table attraction_types {
+  type varchar [pk, not null]
+}
+
+Table attraction_type {
+  id bigint [pk]
+  attraction_id bigint
+  type varchar
+  indexes {
+    (attraction_id, type) [unique]
+  }
+}
+
+Ref: attraction_type.type > attraction_types.type
+Ref: attraction_type.id > tourist_attractions.id
