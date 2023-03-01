@@ -70,9 +70,9 @@ Ref: images.city_id > cities.id [delete: cascade]
 Ref: images.attraction_id > tourist_attractions.id [delete: cascade]
 Ref: images.review_id > reviews.id [delete: cascade]
 
-// long/integer is not used because the type will still need to be returned defeating the whole purpose and the braces and the id being returned will probably make it worse as well
 Table attraction_types {
-  type varchar [pk, not null]
+  id bigint [pk]
+  type varchar [not null, unique]
 }
 
 Table attraction_type {
@@ -84,5 +84,5 @@ Table attraction_type {
   }
 }
 
-Ref: attraction_type.type > attraction_types.type
+Ref: attraction_type.type > attraction_types.id
 Ref: attraction_type.id > tourist_attractions.id
