@@ -78,11 +78,11 @@ Table attraction_types {
 Table attraction_type {
   id bigint [pk]
   attraction_id bigint
-  type varchar
+  type_id bigint
   indexes {
-    (attraction_id, type) [unique]
+    (attraction_id, type_id) [unique]
   }
 }
 
-Ref: attraction_type.type > attraction_types.id
-Ref: attraction_type.id > tourist_attractions.id
+Ref: attraction_type.type_id > attraction_types.id
+Ref: attraction_type.attraction_id > tourist_attractions.id
