@@ -1,6 +1,7 @@
 package com.cythero.cityguide.usersservice.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.sun.security.auth.UserPrincipal
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
@@ -24,6 +25,10 @@ data class User(
     private val username: String,
 ) : UserDetails {
 
+    companion object {
+        fun User.toUserPrincipal(): UserPrincipal = UserPrincipal(username)
+    }
+
     @JsonIgnore
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
         mutableListOf(SimpleGrantedAuthority("USER"))
@@ -32,7 +37,6 @@ data class User(
 
     @JsonIgnore
     override fun getPassword(): String = username
-
 
     @JsonIgnore
     override fun isAccountNonExpired(): Boolean = true
@@ -62,6 +66,7 @@ data class User(
     }
 
 }
+
 
 /*
 @Entity

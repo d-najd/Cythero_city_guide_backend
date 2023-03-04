@@ -1,4 +1,6 @@
 package com.cythero.cityguide.usersservice.config
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.server.ServerWebExchange
@@ -17,6 +19,9 @@ class JwtAuthenticationFilter : WebFilter {
         val userPrincipal = JwtUtils.getUserPrincipalFromToken(token)
         val authentication = UsernamePasswordAuthenticationToken(userPrincipal, null, null)
         SecurityContextHolder.getContext().authentication = authentication
+        if (authentication.isAuthenticated) {
+            exchange.response.statusCode = HttpStatus.ACCEPTED
+        }
         return chain.filter(exchange)
     }
 }

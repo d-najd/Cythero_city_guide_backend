@@ -1,5 +1,7 @@
 package com.cythero.cityguide.usersservice.web
 
+import com.cythero.cityguide.usersservice.config.JwtUtils
+import com.cythero.cityguide.usersservice.model.JwtTokenHolder
 import com.cythero.cityguide.usersservice.model.User
 import com.cythero.cityguide.usersservice.model.UserHolder
 import com.cythero.cityguide.usersservice.model.UserRepository
@@ -9,7 +11,9 @@ import java.util.UUID
 
 @RequestMapping("/api")
 @RestController
-class UserResource(val repository: UserRepository) {
+class UserResource(
+    val repository: UserRepository
+) {
     @GetMapping("/testing/getAll")
     fun getAll(): UserHolder {
         return UserHolder(repository.findAll())
@@ -27,12 +31,12 @@ class UserResource(val repository: UserRepository) {
         @PathVariable username: String
     ): User {
         return repository.findByUsername(username).orElseThrow { throw
-        IllegalArgumentException("invalid username $username")
+            IllegalArgumentException("invalid username $username")
         }
     }
 
     @PostMapping
-    fun post(
+    fun createUser(
         @RequestBody pojo: User,
     ): User {
         repository.findByUsername(pojo.username).ifPresent {
@@ -41,6 +45,27 @@ class UserResource(val repository: UserRepository) {
         return repository.save(pojo.copy(
             id = UUID.randomUUID().toString()
         ))
+    }
+
+    @PostMapping("/generateToken")
+    fun generateToken(
+        @RequestParam username: String,
+    ): JwtTokenHolder {
+        val user = repository.findByUsername(username).orElseThrow {
+            throw IllegalArgumentException("User with credentials $username does not exist")
+        }
+        return JwtTokenHolder.generateTokenFromUser(user)
+    }
+
+    @PostMapping("/generateTokenUsingRefreshToken")
+    fun generateFromRefreshToken(
+        @RequestParam refreshToken: String,
+    ): JwtTokenHolder {
+        val userPrincipal = JwtUtils.getUserPrincipalFromToken(refreshToken)
+        val user = repository.findByUsername(userPrincipal.name).orElseThrow {
+            throw IllegalArgumentException("User with credentials ${userPrincipal.name} does not exist")
+        }
+        return JwtTokenHolder.generateTokenFromUser(user)
     }
 
     // Put request intentionally left out
