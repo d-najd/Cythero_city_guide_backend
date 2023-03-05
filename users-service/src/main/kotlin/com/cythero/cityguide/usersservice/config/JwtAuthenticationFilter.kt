@@ -19,9 +19,9 @@ class JwtAuthenticationFilter : WebFilter {
         val userPrincipal = JwtUtils.getUserPrincipalFromToken(token)
         val authentication = UsernamePasswordAuthenticationToken(userPrincipal, null, null)
         SecurityContextHolder.getContext().authentication = authentication
-        if (authentication.isAuthenticated) {
-            exchange.response.statusCode = HttpStatus.ACCEPTED
-        }
+        //if (authentication.isAuthenticated) {
+         //   exchange.response.statusCode = HttpStatus.ACCEPTED
+        //}
         return chain.filter(exchange)
     }
 }
