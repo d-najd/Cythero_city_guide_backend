@@ -8,7 +8,7 @@ import java.util.*
 
 object JwtUtils {
     private const val secret = "secret"
-     val algorithm = Algorithm.HMAC512(secret)
+    private val algorithm = Algorithm.HMAC512(secret)
     private const val STANDARD_EXPIRE_DATE = 14L * 24L * 60L * 60L * 1000L
     private const val REFRESH_EXPIRE_DATE = 180L * 24L * 60L * 60L * 1000L
 
