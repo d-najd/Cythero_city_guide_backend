@@ -2,8 +2,10 @@ package com.cythero.cityguide.usersservice.config
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.interfaces.DecodedJWT
 import com.cythero.cityguide.usersservice.model.JwtTokenHolder
 import com.sun.security.auth.UserPrincipal
+import java.lang.IllegalArgumentException
 import java.util.*
 
 object JwtUtils {
@@ -28,7 +30,7 @@ object JwtUtils {
             .withClaim("typ", "refresh")
             .withClaim("name", userPrincipal.name)
             .withIssuedAt(Date(System.currentTimeMillis()))
-            //.withNotBefore(Date(System.currentTimeMillis() + STANDARD_EXPIRE_DATE))
+            .withNotBefore(Date(System.currentTimeMillis() + STANDARD_EXPIRE_DATE))
             .withExpiresAt(Date(System.currentTimeMillis() + REFRESH_EXPIRE_DATE))
             .sign(algorithm)
     }
@@ -42,6 +44,12 @@ object JwtUtils {
 
     fun getUserPrincipalFromToken(token: String): UserPrincipal {
         val claims = JWT.require(algorithm).build().verify(token)
+        //if(claims.expiresAt?.after(Date()) == true) throw IllegalArgumentException("Token has expired ${claims.expiresAt}, $token")
+        //if(claims.notBefore?.before(Date()) == true) throw IllegalArgumentException("Token not before ${claims.notBefore}, $token")
         return UserPrincipal(claims.getClaim("name").asString())
+    }
+
+    fun getClaims(token: String): DecodedJWT? {
+        return JWT.require(algorithm).build().verify(token)
     }
 }

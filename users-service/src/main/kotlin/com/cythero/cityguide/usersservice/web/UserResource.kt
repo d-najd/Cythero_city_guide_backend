@@ -31,28 +31,6 @@ class UserResource(
         return Mono.just(repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") })
     }
 
-
-    /*
-    override fun findByUsername(username: String?): Mono<UserDetails> = Mono.justOrEmpty(
-        username?.let {
-            repository.findByUsername(it).orElseThrow {
-                IllegalArgumentException("invalid username $username")
-            }
-        }
-    )
-
-     */
-    /*
-        return Mono.justOrEmpty(
-            username?.let {
-                repository.findByUsername(it).orElseThrow {
-                    IllegalArgumentException("invalid username $username")
-                }
-            }
-        )
-
-     */
-
     @GetMapping("/username/{username}")
     fun getByUsername(
         @PathVariable username: String
@@ -90,6 +68,7 @@ class UserResource(
         @RequestParam refreshToken: String,
     ): Mono<JwtTokenHolder> {
         val userPrincipal = JwtUtils.getUserPrincipalFromToken(refreshToken)
+        if(JwtUtils.getClaims(refreshToken)!!.getClaim("typ").asString() != "refresh") throw IllegalArgumentException("Can not generate tokens from standard token")
         val user = repository.findByUsername(userPrincipal.name).orElseThrow {
             throw IllegalArgumentException("User with credentials ${userPrincipal.name} does not exist")
         }
