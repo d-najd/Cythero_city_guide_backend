@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
+import java.security.Principal
 import java.util.UUID
 
 @Primary
@@ -53,6 +54,11 @@ class UserResource(
         )))
     }
 
+    @GetMapping("/testing/getPrincipal")
+    fun getPrincipal(principal: Principal): Principal {
+        return principal
+    }
+
     @PostMapping("/generateToken")
     fun generateToken(
         @RequestParam username: String,
@@ -84,8 +90,6 @@ class UserResource(
     ) {
         repository.deleteById(id)
     }
-
-
 
     /* Doesn't want to work for some reason
     @ResponseStatus(HttpStatus.NO_CONTENT)

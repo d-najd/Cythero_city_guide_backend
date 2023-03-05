@@ -39,7 +39,7 @@ class SecurityConfig {
             .pathMatchers("/login").permitAll()
             .anyExchange().authenticated()
             .and()
-            .addFilterAt(authenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
+            .addFilterAt(authenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION).oauth2Login()
         return http.build()
     }
 
