@@ -18,7 +18,7 @@ import java.util.UUID
 @RestController
 class UserResource(
     val repository: UserRepository
-): ReactiveUserDetailsService {
+) {
     @GetMapping("/testing/getAll")
     fun getAll(): Mono<UserHolder> {
         return Mono.just(UserHolder(repository.findAll()))
@@ -32,6 +32,7 @@ class UserResource(
     }
 
 
+    /*
     override fun findByUsername(username: String?): Mono<UserDetails> = Mono.justOrEmpty(
         username?.let {
             repository.findByUsername(it).orElseThrow {
@@ -39,6 +40,8 @@ class UserResource(
             }
         }
     )
+
+     */
     /*
         return Mono.justOrEmpty(
             username?.let {
