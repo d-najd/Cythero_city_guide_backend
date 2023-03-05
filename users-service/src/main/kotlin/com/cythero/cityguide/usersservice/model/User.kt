@@ -23,6 +23,11 @@ data class User(
     @NotNull
     @NotEmpty
     private val username: String,
+
+    @Column(name = "gmail", unique = true, nullable = false)
+    @NotEmpty
+    @NotNull
+    private val gmail: String,
 ) : UserDetails {
 
     companion object {

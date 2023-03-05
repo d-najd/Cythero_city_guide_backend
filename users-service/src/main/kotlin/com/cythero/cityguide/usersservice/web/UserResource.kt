@@ -5,8 +5,10 @@ import com.cythero.cityguide.usersservice.model.JwtTokenHolder
 import com.cythero.cityguide.usersservice.model.User
 import com.cythero.cityguide.usersservice.model.UserHolder
 import com.cythero.cityguide.usersservice.model.UserRepository
+import org.springframework.boot.actuate.web.exchanges.HttpExchange
 import org.springframework.context.annotation.Primary
 import org.springframework.http.HttpStatus
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.*
@@ -41,7 +43,6 @@ class UserResource(
         }
     )
 
-
     @PostMapping
     fun createUser(
         @RequestBody pojo: User,
@@ -61,12 +62,15 @@ class UserResource(
 
     @PostMapping("/generateToken")
     fun generateToken(
-        @RequestParam username: String,
+        @RequestParam username: String? = null,
     ): Mono<JwtTokenHolder> {
-        val user = repository.findByUsername(username).orElseThrow {
-            throw IllegalArgumentException("User with credentials $username does not exist")
+        if(username != null) {
+            val user = repository.findByUsername(username).orElseThrow {
+                throw IllegalArgumentException("User with credentials $username does not exist")
+            }
+            return Mono.just(JwtTokenHolder.generateTokenFromUser(user))
         }
-        return Mono.just(JwtTokenHolder.generateTokenFromUser(user))
+        return Mono.empty()
     }
 
     @PostMapping("/generateTokenUsingRefreshToken")

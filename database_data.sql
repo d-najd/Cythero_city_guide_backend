@@ -1,8 +1,8 @@
-INSERT IGNORE INTO users VALUES ("1", "user1");
+INSERT IGNORE INTO users VALUES ("1", "user1", "dimitar.najdovskiw@gmail.com");
 
-INSERT IGNORE INTO users VALUES ("2", "user2");
+INSERT IGNORE INTO users VALUES ("2", "user2", "example.gmail.com");
 
-INSERT IGNORE INTO users VALUES ("3", "user3");
+INSERT IGNORE INTO users VALUES ("3", "user3", "dimitar.hristijan.najdovski@gmail.com");
 
 INSERT IGNORE INTO locations VALUES (1, 100.02, 50.6342871, "Macedonia - Bitola?", "https://picsum.photos/1080/720");
 

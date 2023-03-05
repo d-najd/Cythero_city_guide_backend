@@ -1,6 +1,7 @@
 Table users {
   id varchar [pk]
   username varchar [not null, unique]
+  gmail varchar [not null, unique]
 }
 
 Table locations {
