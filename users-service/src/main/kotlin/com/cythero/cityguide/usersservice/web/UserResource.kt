@@ -18,7 +18,7 @@ import java.util.UUID
 @RestController
 class UserResource(
     val repository: UserRepository
-): ReactiveUserDetailsService {
+) {
     @GetMapping("/testing/getAll")
     fun getAll(): Mono<UserHolder> {
         return Mono.just(UserHolder(repository.findAll()))
@@ -31,25 +31,6 @@ class UserResource(
         return Mono.just(repository.findById(id).orElseThrow { throw IllegalArgumentException("Invalid id $id") })
     }
 
-
-    override fun findByUsername(username: String?): Mono<UserDetails> = Mono.justOrEmpty(
-        username?.let {
-            repository.findByUsername(it).orElseThrow {
-                IllegalArgumentException("invalid username $username")
-            }
-        }
-    )
-    /*
-        return Mono.justOrEmpty(
-            username?.let {
-                repository.findByUsername(it).orElseThrow {
-                    IllegalArgumentException("invalid username $username")
-                }
-            }
-        )
-
-     */
-
     @GetMapping("/username/{username}")
     fun getByUsername(
         @PathVariable username: String
@@ -58,7 +39,6 @@ class UserResource(
             IllegalArgumentException("invalid username $username")
         }
     )
-
 
     @PostMapping
     fun createUser(

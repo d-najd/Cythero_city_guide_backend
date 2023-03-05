@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono
 class SecurityConfig {
 
     @Autowired
-    lateinit var userResource: UserResource
+    lateinit var userService: UserService
 
     @Bean
     fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
@@ -64,7 +64,7 @@ class SecurityConfig {
 
     @Bean
     fun authenticationManager(): ReactiveAuthenticationManager {
-        val authManager = UserDetailsRepositoryReactiveAuthenticationManager(userResource)
+        val authManager = UserDetailsRepositoryReactiveAuthenticationManager(userService)
         authManager.setPasswordEncoder(passwordEncoder())
         return authManager
     }
@@ -78,10 +78,10 @@ class SecurityConfig {
         override fun convert(exchange: ServerWebExchange): Mono<Authentication> {
             val token = extractToken(exchange.request)
             return if (token != null) {
-                //val claims = JWT.decode(token).claims.values
+                val userPrincipal = JwtUtils.getUserPrincipalFromToken(token)
                 val authentication = UsernamePasswordAuthenticationToken(
-                    JwtUtils.getUserPrincipalFromToken(token),
-                    "",
+                    userPrincipal,
+                    userPrincipal.name,
                     null,
                 )
                 Mono.just(authentication)
