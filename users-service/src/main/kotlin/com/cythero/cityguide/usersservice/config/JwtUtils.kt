@@ -44,8 +44,6 @@ object JwtUtils {
 
     fun getUserPrincipalFromToken(token: String): UserPrincipal {
         val claims = JWT.require(algorithm).build().verify(token)
-        //if(claims.expiresAt?.after(Date()) == true) throw IllegalArgumentException("Token has expired ${claims.expiresAt}, $token")
-        //if(claims.notBefore?.before(Date()) == true) throw IllegalArgumentException("Token not before ${claims.notBefore}, $token")
         return UserPrincipal(claims.getClaim("name").asString())
     }
 
