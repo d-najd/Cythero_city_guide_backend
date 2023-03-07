@@ -1,6 +1,7 @@
 package com.cythero.cityguide.touristattractionsservice.model
 
 import com.cythero.cityguide.touristattractionsservice.model.relations.City
+import com.cythero.cityguide.touristattractionsservice.model.relations.Image
 import com.cythero.cityguide.touristattractionsservice.model.relations.Location
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
@@ -48,6 +49,12 @@ data class TouristAttraction (
 
     @Column(name = "description", length = 65534)
     val description: String?,
+
+    @OneToMany(
+        mappedBy = "attraction",
+        fetch = FetchType.EAGER,
+    )
+    val images: List<Image> = emptyList()
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
