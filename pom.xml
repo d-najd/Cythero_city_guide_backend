@@ -12,6 +12,7 @@
 		<module>discovery-server</module>
 		<module>config-server</module>
 		<module>api-gateway</module>
+		<module>token-service</module>
 		<module>users-service</module>
 		<module>locations-service</module>
 		<module>countries-service</module>

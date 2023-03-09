@@ -1,0 +1,9 @@
+server.port: 8097
+
+spring:
+  config.import: configserver:http://localhost:8888
+  application.name: token-service
+  security.oauth2:
+    resourceserver:
+      jwt:
+        issuer-uri: https://accounts.google.com
