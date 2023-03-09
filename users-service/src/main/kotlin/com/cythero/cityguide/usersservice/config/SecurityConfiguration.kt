@@ -3,23 +3,19 @@ package com.cythero.cityguide.usersservice.config
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
-import org.springframework.http.server.reactive.ServerHttpRequest
-import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder
 import org.springframework.security.config.web.server.ServerHttpSecurity
-import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.NoOpPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter
-import org.springframework.security.web.server.authentication.ServerAuthenticationConverter
 import org.springframework.web.server.ServerWebExchange
+import org.springframework.web.server.WebFilter
+import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
+
 
 @Configuration
 @EnableWebFluxSecurity
@@ -39,10 +35,25 @@ class SecurityConfig {
             .pathMatchers("/login").permitAll()
             .anyExchange().authenticated()
             .and()
-            .addFilterAt(authenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION).oauth2Login()
+            .oauth2ResourceServer()
+            .jwt()
+            .and()
+            .and()
+            //.addFilterAt(ExampleFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
         return http.build()
     }
 
+    /*
+    inner class ExampleFilter : WebFilter {
+        override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
+            chain.filter(exchange)
+        }
+
+    }
+
+     */
+
+    /*
     private fun authenticationFilter(): AuthenticationWebFilter {
         val filter = AuthenticationWebFilter(authenticationManager())
         filter.setServerAuthenticationConverter(JwtAuthenticationConverter())
@@ -52,7 +63,7 @@ class SecurityConfig {
     @Bean
     fun authenticationManager(): ReactiveAuthenticationManager {
         val authManager = UserDetailsRepositoryReactiveAuthenticationManager(userService)
-        authManager.setPasswordEncoder(passwordEncoder())
+        authManager.setPasswordEncoder(NoOpPasswordEncoder())
         return authManager
     }
 
@@ -86,5 +97,5 @@ class SecurityConfig {
             }
         }
     }
-
+     */
 }

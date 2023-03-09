@@ -3,7 +3,15 @@ server.port: 8090
 spring:
   config.import: configserver:http://localhost:8888
   application.name: users-service
-  security.oauth2.client.registration:
-    google:
-      clientId: 142523564407-37u9vflccclbfguvhnpka2jfdmpln43r.apps.googleusercontent.com
-      clientSecret: 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
+  security.oauth2:
+    resourceserver:
+      jwt:
+        issuer-uri: https://accounts.google.com
+      #opaque-token:
+      #  introspection-uri: localhost:8090/introspect
+      #  client-id: 142523564407-37u9vflccclbfguvhnpka2jfdmpln43r.apps.googleusercontent.com
+      #  client-secret: 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
+    #client.registration:
+    #  google:
+    #    clientId: 142523564407-37u9vflccclbfguvhnpka2jfdmpln43r.apps.googleusercontent.com
+    #    clientSecret: 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
