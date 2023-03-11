@@ -1,19 +1,19 @@
-package com.cythero.cityguide.usersservice.config.security
+package com.cythero.cityguide.reviewsservice.config.security
 
+import com.cythero.cityguide.reviewsservice.config.security.JwtUtils
 import com.sun.security.auth.UserPrincipal
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder
 import org.springframework.security.config.web.server.ServerHttpSecurity
-import org.springframework.security.core.Authentication
 import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter
 import org.springframework.security.web.server.authentication.ServerAuthenticationConverter
-import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
 
 
@@ -26,6 +26,7 @@ class SecurityConfig {
             .csrf().disable()
             .authorizeExchange()
             .pathMatchers("/api/testing/getAll").permitAll()
+            .pathMatchers(HttpMethod.GET, "/api/**").permitAll()
             .anyExchange().authenticated()
             .and()
             .addFilterAt(authenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)

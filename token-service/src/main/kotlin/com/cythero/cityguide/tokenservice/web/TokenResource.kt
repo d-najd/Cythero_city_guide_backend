@@ -30,7 +30,7 @@ class TokenResource {
         val user = repository.findByGmail(email).orElseThrow {
             BadCredentialsException("User with email $email does not exist")
         }
-        return Mono.just(JwtUtils.generateTokenHolder(user.username))
+        return Mono.just(JwtUtils.generateTokenHolder(user.username, user.id))
     }
 
     @PermitAll
@@ -47,6 +47,7 @@ class TokenResource {
         }
         JwtUtils.verifyToken(refreshToken)
         val username = decodedToken.getClaim("name").asString()
-        return Mono.just(JwtUtils.generateTokenHolder(username))
+        val userId = decodedToken.getClaim("userId").asString()
+        return Mono.just(JwtUtils.generateTokenHolder(username, userId))
     }
 }

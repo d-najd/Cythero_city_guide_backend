@@ -36,6 +36,7 @@ data class Review (
     )
     val attraction: TouristAttraction?,
 
+    @JsonIgnore
     @Column(name = "user_id", nullable = false, updatable = false)
     val userId: String,
 
@@ -64,6 +65,10 @@ data class Review (
     @PrePersist
     fun validate() {
         if(!starsValidate(stars)) throw IllegalArgumentException("Stars must be in range 0..9")
+    }
+
+    fun getUsername(): String? {
+        return user?.username
     }
 
     override fun equals(other: Any?): Boolean {

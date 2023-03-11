@@ -22,31 +22,33 @@ object JwtUtils {
         }
     }
 
-    private fun generateStandardToken(username: String): String {
+    private fun generateStandardToken(username: String, userId: String): String {
         return JWT.create()
             .withSubject("authentication")
             .withClaim("typ", "JWT")
             .withClaim("name", username)
+            .withClaim("userId", userId)
             .withIssuedAt(Date(System.currentTimeMillis()))
             .withExpiresAt(Date(System.currentTimeMillis() + STANDARD_EXPIRE_DATE))
             .sign(algorithm)
     }
 
-    private fun generateRefreshToken(username: String): String {
+    private fun generateRefreshToken(username: String, userId: String): String {
         return JWT.create()
             .withSubject("authentication")
             .withClaim("refresh", true)
             .withClaim("name", username)
+            .withClaim("userId", userId)
             .withIssuedAt(Date(System.currentTimeMillis()))
             // .withNotBefore(Date(System.currentTimeMillis() + STANDARD_EXPIRE_DATE))
             .withExpiresAt(Date(System.currentTimeMillis() + REFRESH_EXPIRE_DATE))
             .sign(algorithm)
     }
 
-    fun generateTokenHolder(username: String): JwtTokenHolder {
+    fun generateTokenHolder(username: String, userId: String): JwtTokenHolder {
         return JwtTokenHolder(
-            token = generateStandardToken(username),
-            refreshToken = generateRefreshToken(username),
+            token = generateStandardToken(username, userId),
+            refreshToken = generateRefreshToken(username, userId),
         )
     }
 
