@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ApiGateway" type="JetRunConfigurationType" singleton="false">
+  <configuration default="false" name="ApiGateway" type="JetRunConfigurationType" singleton="true">
     <option name="MAIN_CLASS_NAME" value="com.cythero.cityguide.apigateway.ApiGatewayApplicationKt" />
     <module name="api-gateway" />
     <shortenClasspath name="NONE" />

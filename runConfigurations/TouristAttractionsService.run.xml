@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="TouristAttractionsService" type="JetRunConfigurationType" singleton="false">
+  <configuration default="false" name="TouristAttractionsService" type="JetRunConfigurationType" singleton="true">
     <option name="MAIN_CLASS_NAME" value="com.cythero.cityguide.touristattractionsservice.TouristAttractionsServiceApplicationKt" />
     <module name="tourist-attractions-service" />
     <shortenClasspath name="NONE" />

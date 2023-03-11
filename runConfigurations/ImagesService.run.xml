@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ImagesService" type="JetRunConfigurationType" singleton="false">
+  <configuration default="false" name="ImagesService" type="JetRunConfigurationType" singleton="true">
     <option name="MAIN_CLASS_NAME" value="com.cythero.cityguide.imagesservice.ImagesServiceApplicationKt" />
     <module name="images-service" />
     <shortenClasspath name="NONE" />

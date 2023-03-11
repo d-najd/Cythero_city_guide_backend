@@ -25,6 +25,7 @@ class SecurityConfig {
         http
             .csrf().disable()
             .authorizeExchange()
+            .pathMatchers(HttpMethod.POST, "/api/generateTokenUsingRefreshToken").permitAll()
             .anyExchange().authenticated()
             .and()
             .oauth2ResourceServer()

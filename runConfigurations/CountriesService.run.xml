@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="CountriesService" type="JetRunConfigurationType" singleton="false">
+  <configuration default="false" name="CountriesService" type="JetRunConfigurationType" singleton="true">
     <option name="MAIN_CLASS_NAME" value="com.cythero.cityguide.countriesservice.CountriesServiceApplicationKt" />
     <module name="countries-service" />
     <shortenClasspath name="NONE" />

@@ -36,10 +36,10 @@ object JwtUtils {
     private fun generateRefreshToken(username: String): String {
         return JWT.create()
             .withSubject("authentication")
-            .withClaim("typ", "refresh")
+            .withClaim("refresh", true)
             .withClaim("name", username)
             .withIssuedAt(Date(System.currentTimeMillis()))
-            .withNotBefore(Date(System.currentTimeMillis() + STANDARD_EXPIRE_DATE))
+            // .withNotBefore(Date(System.currentTimeMillis() + STANDARD_EXPIRE_DATE))
             .withExpiresAt(Date(System.currentTimeMillis() + REFRESH_EXPIRE_DATE))
             .sign(algorithm)
     }

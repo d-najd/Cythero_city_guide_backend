@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="LocationsService" type="JetRunConfigurationType" singleton="false">
+  <configuration default="false" name="LocationsService" type="JetRunConfigurationType" singleton="true">
     <option name="MAIN_CLASS_NAME" value="com.cythero.cityguide.locationsservice.LocationsServiceApplicationKt" />
     <module name="locations-service" />
     <shortenClasspath name="NONE" />
