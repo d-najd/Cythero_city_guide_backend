@@ -1,12 +1,12 @@
 package com.cythero.cityguide.tokenservice.web
 
 import com.auth0.jwt.JWT
-import com.cythero.cityguide.tokenservice.config.CustomUnauthorizedException
 import com.cythero.cityguide.tokenservice.config.JwtUtils
 import com.cythero.cityguide.tokenservice.model.JwtTokenHolder
 import com.cythero.cityguide.tokenservice.model.UserRepository
 import jakarta.annotation.security.PermitAll
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken
 import org.springframework.web.bind.annotation.*
@@ -28,7 +28,7 @@ class TokenResource {
         }
         val email = principal.token.getClaimAsString("email")
         val user = repository.findByGmail(email).orElseThrow {
-            CustomUnauthorizedException("User with email $email does not exist")
+            BadCredentialsException("User with email $email does not exist")
         }
         return Mono.just(JwtUtils.generateTokenHolder(user.username))
     }

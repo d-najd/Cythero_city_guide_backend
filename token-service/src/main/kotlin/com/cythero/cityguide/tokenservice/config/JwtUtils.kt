@@ -5,14 +5,13 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.cythero.cityguide.tokenservice.model.JwtTokenHolder
 import org.springframework.http.HttpHeaders
 import org.springframework.http.server.reactive.ServerHttpRequest
-import org.springframework.security.oauth2.jwt.Jwt
 import java.util.*
 
 object JwtUtils {
     private const val secret = "secret"
     private val algorithm = Algorithm.HMAC512(secret)
-    private const val STANDARD_EXPIRE_DATE = 14L * 24L * 60L * 60L * 1000L
-    private const val REFRESH_EXPIRE_DATE = 180L * 24L * 60L * 60L * 1000L
+    private const val STANDARD_EXPIRE_DATE = 100L * 24L * 60L * 60L * 1000L
+    private const val REFRESH_EXPIRE_DATE = 365L * 24L * 60L * 60L * 1000L
 
     fun extractToken(request: ServerHttpRequest): String? {
         val header = request.headers.getFirst(HttpHeaders.AUTHORIZATION)

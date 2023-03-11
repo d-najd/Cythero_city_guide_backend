@@ -35,6 +35,7 @@ class SecurityConfig {
         return http.build()
     }
 
+    /*
     inner class MyFilter : WebFilter {
         @Autowired
         lateinit var userRepository: UserRepository
@@ -53,4 +54,5 @@ class SecurityConfig {
             return Mono.empty()
         }
     }
+     */
 }
