@@ -21,15 +21,18 @@ class TouristAttractionResource(val repository: TouristAttractionRepository) {
     fun getNextAttractionsPage(
         @PathVariable page: Int,
         @RequestParam("pageSize") pageSize: Int? = null,
-        @RequestParam("filters") filter: Array<String>? = null,
-        //@RequestParam("filters") filter: List<String> = listOf("id"),
+        @RequestParam("sort") sort: Array<String>? = null,
     ): TouristAttractionHolder {
         if(pageSize != null && pageSize > 25) {
             throw IllegalArgumentException("pageSize must not exceed 25, current is $pageSize")
         }
         return TouristAttractionHolder(repository.findAll(PageRequest
-            .of(page, pageSize ?: 5, Sort.DEFAULT_DIRECTION, *filter ?: arrayOf("id"))).content)
-
+            .of(
+                page,
+                pageSize ?: 5,
+                Sort.DEFAULT_DIRECTION,
+                *sort ?: arrayOf("id")),
+        ).content)
     }
 
     @GetMapping("/{id}")

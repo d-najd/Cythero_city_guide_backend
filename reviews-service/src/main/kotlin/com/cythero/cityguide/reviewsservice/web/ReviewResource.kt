@@ -4,10 +4,16 @@ import com.cythero.cityguide.reviewsservice.config.security.JwtUtils
 import com.cythero.cityguide.reviewsservice.model.Review
 import com.cythero.cityguide.reviewsservice.model.ReviewHolder
 import com.cythero.cityguide.reviewsservice.model.ReviewRepository
+import org.aspectj.weaver.TypeVariable
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.Jwt
+import org.springframework.data.domain.Example
+import org.springframework.data.domain.ExampleMatcher
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.core.userdetails.User
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
 
@@ -18,6 +24,28 @@ class ReviewsResource(val repository: ReviewRepository) {
     fun getAll(): ReviewHolder {
         return ReviewHolder(repository.findAll())
     }
+
+    @GetMapping("/page/{page}/attraction/{attractionId}")
+    fun getNextReviewsPageByAttraction(
+        @PathVariable page: Int,
+        @PathVariable attractionId: Long,
+        @RequestParam("pageSize") pageSize: Int? = null,
+        @RequestParam("sort") sort: Array<String>? = null,
+        //@RequestParam("filters") filter: List<String> = listOf("id"),
+    ): ReviewHolder {
+        if (pageSize != null && pageSize > 100) {
+            throw IllegalArgumentException("pageSize must not exceed 100, current is $pageSize")
+        }
+        return ReviewHolder(
+            repository.findAllByAttractionId(
+                pageable = PageRequest.of(
+                    page,
+                    pageSize ?: 10, Sort.DEFAULT_DIRECTION, *sort ?: arrayOf("id")
+                ),
+                attractionId = attractionId
+            ).content)
+    }
+
 
     @GetMapping("/{id}")
     fun getById(
