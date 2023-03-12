@@ -43,7 +43,8 @@ class ReviewsResource(val repository: ReviewRepository) {
                     pageSize ?: 10, Sort.DEFAULT_DIRECTION, *sort ?: arrayOf("id")
                 ),
                 attractionId = attractionId
-            ).content)
+            ).content
+        )
     }
 
 
